@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Birthday Sanu 💜</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#3f0071,#7b2cbf,#c77dff);color:#fff;overflow-x:hidden}
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
+.hidden{display:none}
+#cake{font-size:150px;cursor:pointer;animation:swing 2s infinite ease-in-out}
+@keyframes swing{0%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}100%{transform:rotate(-15deg)}}
+.flower{position:fixed;top:-50px;pointer-events:none;z-index:1;animation-name:fall,sway;animation-timing-function:linear,ease-in-out;animation-iteration-count:1,infinite}
+@keyframes fall{to{transform:translateY(120vh) rotate(360deg)}}
+@keyframes sway{0%,100%{margin-left:-20px}50%{margin-left:20px}}
+.card{background:rgba(255,255,255,.15);padding:20px;border-radius:20px;width:260px;margin:10px;cursor:pointer}
+button{padding:10px 20px;border:none;border-radius:20px;background:#c77dff;color:#fff;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:900px;width:100%}
+.memoryBox{background:rgba(255,255,255,.12);padding:15px;border-radius:20px}
+.memoryBox img{width:100%;height:250px;object-fit:cover;border-radius:15px}
+#centerText{position:fixed;z-index:5;font-size:40px;text-shadow:0 0 20px #fff}
+#envelope{font-size:120px;cursor:pointer;transition:.4s}
+#envelope:hover{transform:scale(1.08)}
+#letterPaper{display:none;background:#fff;color:#444;max-width:700px;padding:30px;border-radius:20px;line-height:1.9;white-space:pre-wrap;box-shadow:0 0 25px rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<div id="home" class="page">
+<h1>Happy Birthday Sanu 💜</h1>
+<p>Click the cake for your surprise</p>
+<div id="cake">🎂</div>
+</div>
+
+<div id="flowers" class="page hidden">
+<div id="centerText">For You Sanu 💜<br><small>Every flower reminds me of your beauty</small></div>
+</div>
+
+<div id="menu" class="page hidden">
+<h2>Made Just For You 💜</h2>
+<div class="card" onclick="show('flowerGift')">🌸 Your Favourite Flower</div>
+<div class="card" onclick="show('memories')">📸 Our Memories Together</div>
+<div class="card" onclick="show('letter')">💌 Love Letter</div>
+</div>
+
+<div id="flowerGift" class="page hidden">
+<button onclick="backMenu()">← Go Back</button>
+<h2>Your Favourite Flower 🌸</h2>
+<img src="IMG_5460.jpeg" style="width:min(90vw,550px);border-radius:25px;box-shadow:0 0 30px rgba(255,255,255,.4)">
+<p>Every flower reminds me of your beauty, kindness and the happiness you bring into my life. 💜</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rmOIe8XfDXY" style="max-width:100%;border-radius:15px" allowfullscreen></iframe>
+</div>
+
+<div id="memories" class="page hidden">
+<button onclick="backMenu()">← Go Back</button>
+<h2>Our Memories Together 📸</h2>
+<p>Every picture tells a beautiful story of us ❤️</p>
+<div class="grid">
+<div class="memoryBox"><img src="memory1.jpg"><p>Our First Memory ❤️</p></div>
+<div class="memoryBox"><img src="memory2.jpg"><p>Smiles Together 😊</p></div>
+<div class="memoryBox"><img src="memory3.jpg"><p>Beautiful Day 💜</p></div>
+<div class="memoryBox"><img src="memory4.jpg"><p>Forever Us 🌸</p></div>
+<div class="memoryBox"><img src="memory5.jpg"><p>Special Moments ✨</p></div>
+<div class="memoryBox"><img src="memory6.jpg"><p>Happy Birthday My Love ❤️</p></div>
+</div>
+</div>
+
+<div id="letter" class="page hidden">
+<button onclick="backMenu()">← Go Back</button>
+<h2>Love Letter 💌</h2>
+<div id="envelope" onclick="typeLetter()">💌</div>
+<p>Tap the envelope to open your letter ❤️</p>
+<div id="letterPaper"><p id="output"></p></div>
+</div>
+
+<script>
+document.getElementById('cake').onclick=()=>{
+home.classList.add('hidden');
+flowers.classList.remove('hidden');
+for(let i=0;i<300;i++){
+let f=document.createElement('div');
+f.className='flower';
+f.innerHTML=Math.random()>0.3?'🌸':'💜';
+f.style.left=Math.random()*100+'vw';
+f.style.fontSize=(18+Math.random()*40)+'px';
+f.style.animationDuration=(3+Math.random()*6)+'s,2s';
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),10000);
+}
+setTimeout(()=>{flowers.classList.add('hidden');menu.classList.remove('hidden');},6000);
+}
+function hideAll(){['menu','flowerGift','memories','letter'].forEach(x=>document.getElementById(x).classList.add('hidden'))}
+function show(id){hideAll();document.getElementById(id).classList.remove('hidden')}
+function backMenu(){hideAll();menu.classList.remove('hidden')}
+function typeLetter(){
+const text=`Happy Birthday My Beautiful Sanu ❤️
+
+You are the most precious person in my life.
+
+Thank you for filling my days with love, happiness and unforgettable memories.
+
+I hope today brings you as much joy as you bring into my life.
+
+No matter where life takes us, I will always care for you and cherish every moment we share.
+
+Happy Birthday once again, my love.
+
+I love you forever. ❤️`;
+letterPaper.style.display='block';
+output.innerHTML='';
+let i=0;
+(function t(){
+ if(i<text.length){output.innerHTML+=text.charAt(i++);setTimeout(t,35);}
+})();
+}
+</script>
+</body>
+</html>
